@@ -6,6 +6,6 @@
         x:Class="PLG_Pdac.MainWindow"
         Title="PLG_Pdac">
     <Grid>
-        
+        <Button Content="PDF laden..." HorizontalAlignment="Stretch" HorizontalContentAlignment="Center" FontSize="18" VerticalAlignment="Bottom" Margin="10,0,10,10" Click="Upload_Click" />
     </Grid>
 </Window>
