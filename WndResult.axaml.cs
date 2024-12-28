@@ -11,10 +11,12 @@ namespace PLG_Pdac;
 public partial class WndResult : Window
 {
     public string filePath;
-    public WndResult(string path)
+    private MainWindow mw;
+    public WndResult(string path, MainWindow main)
     {
         InitializeComponent();
 
         filePath = path;
+        mw = main;
     }
 }

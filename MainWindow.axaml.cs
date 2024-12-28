@@ -17,8 +17,9 @@ public partial class MainWindow : Window
     }
 
     public async void Upload_Click(object sender, RoutedEventArgs e){
-        WndResult w = new WndResult(await OpenPdfFileAsync(this));
+        WndResult w = new WndResult(await OpenPdfFileAsync(this), this);
         w.Show();
+        this.Hide();
     }
 
     public async Task<string?> OpenPdfFileAsync(Window window)
