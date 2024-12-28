@@ -6,6 +6,6 @@
         x:Class="PLG_Pdac.WndResult"
         Title="WndResult">
   <Grid>
-
+    <Label Margin="10,10,10,10" x:Name="LblResult" Content="Checking file..."/>
   </Grid>
 </Window>
