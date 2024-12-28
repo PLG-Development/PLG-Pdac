@@ -42,10 +42,10 @@ namespace PLG_Pdac
                 {
                     // PdfPig bietet eine einfache Möglichkeit, Metadaten zu extrahieren
                     var documentInfo = pdfDocument.Information;
-                    metadata["Title"] = documentInfo.Title ?? "Nicht vorhanden";
-                    metadata["Author"] = documentInfo.Author ?? "Nicht vorhanden";
-                    metadata["Subject"] = documentInfo.Subject ?? "Nicht vorhanden";
-                    metadata["Keywords"] = documentInfo.Keywords ?? "Nicht vorhanden";
+                    metadata["Title"] = documentInfo.Title ?? "[Fehlt]";
+                    metadata["Author"] = documentInfo.Author ?? "[Fehlt]";
+                    metadata["Subject"] = documentInfo.Subject ?? "[Fehlt]";
+                    metadata["Keywords"] = documentInfo.Keywords ?? "[Fehlt]";
                 }
             }
             catch
