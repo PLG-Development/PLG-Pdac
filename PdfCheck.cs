@@ -55,30 +55,42 @@ namespace PLG_Pdac
             return metadata;
         }
 
-        public bool HasAltTexts(string pdfPath)
+        public List<(string, string)> HasAltTexts(string pdfPath)
         {
-            try
-            {
-                using (var pdfDocument = PdfDocument.Open(pdfPath))
-                {
-                    foreach (var page in pdfDocument.GetPages())
-                    {
-                        // PdfPig bietet keine direkte Möglichkeit, Alt-Texte auszulesen, daher verwenden wir einen Platzhalter.
-                        // Sie können hier eine erweiterte Logik einbauen, die nach Bild-Tags oder Alt-Texten sucht.
-                        var text = page.Text;
-                        if (text.Contains("Alt-Text"))
-                        {
-                            return true; // Beispiel: Wenn Alt-Text im Text gefunden wird
-                        }
-                    }
-                }
-            }
-            catch
-            {
-                return false; // Fehler beim Lesen der Datei
-            }
-            return false; // Kein Alt-Text gefunden
+            // var imagesWithoutAltText = new List<(string, string)>();
+            // try
+            // {
+            //     using (var pdfDocument = PdfDocument.Open(pdfPath))
+            //     {
+            //         foreach (var page in pdfDocument.GetPages())
+            //         {
+            //             var images = page.GetImages();
+            //             if (images != null)
+            //             {
+            //                 foreach (var image in images)
+            //                 {
+            //                     // PdfPig bietet keine direkte Unterstützung für Alt-Texte,
+            //                     // aber wir gehen davon aus, dass Metadaten oder ähnliche Informationen geprüft werden können.
+            //                     var altText = image.GetOptionalContentLabel(); // Beispiel-Attribut (anpassbar)
+            //                     if (string.IsNullOrWhiteSpace(altText))
+            //                     {
+            //                         imagesWithoutAltText.Add(($"Seite {page.Number}, Bild ID: {image.Id}", altText));
+            //                     }
+            //                 }
+            //             }
+            //         }
+            //     }
+            // }
+            // catch
+            // {
+            //     // Fehler beim Lesen der Datei
+            //     return new List<string> { "Fehler beim Lesen der Datei." };
+            // }
+
+            // return imagesWithoutAltText;
+            throw new NotImplementedException();
         }
+
 
         public bool HasDocumentTags(string pdfPath)
         {
