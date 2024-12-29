@@ -6,7 +6,9 @@
         x:Class="PLG_Pdac.WndResult" Closing="WndResult_Closing"
         Title="WndResult">
   <Grid>
-    <Label Margin="10,10,10,10" x:Name="LblResult" Content="Checking file..."/>
-    <StackPanel Margin="10,10,10,10" x:Name="StpRes" />
+    <Label IsVisible="false" Margin="10,10,10,10" x:Name="LblResult" Content="Checking file..."/>
+    <ScrollViewer Margin="10,10,10,10">
+      <StackPanel x:Name="StpRes" />
+    </ScrollViewer>
   </Grid>
 </Window>
