@@ -46,4 +46,8 @@ public partial class WndResult : Window
 
 
     }
+
+    public void WndResult_Closing(object sender, WindowClosingEventArgs e){
+        mw.Show();
+    }
 }
