@@ -33,26 +33,27 @@ namespace PLG_Pdac
             return false; // Kein extrahierbarer Text gefunden
         }
 
-        public Dictionary<string, string> GetMetadata(string pdfPath)
+        public bool DocumentTagCheck(string pdfPath)
         {
-            var metadata = new Dictionary<string, string>();
-            try
-            {
-                using (var pdfDocument = PdfDocument.Open(pdfPath))
-                {
-                    // PdfPig bietet eine einfache Möglichkeit, Metadaten zu extrahieren
-                    var documentInfo = pdfDocument.Information;
-                    metadata["Title"] = documentInfo.Title ?? "[Fehlt]";
-                    metadata["Author"] = documentInfo.Author ?? "[Fehlt]";
-                    metadata["Subject"] = documentInfo.Subject ?? "[Fehlt]";
-                    metadata["Keywords"] = documentInfo.Keywords ?? "[Fehlt]";
-                }
-            }
-            catch
-            {
-                metadata["Error"] = "Fehler beim Lesen der Metadaten.";
-            }
-            return metadata;
+            // var metadata = new Dictionary<string, string>();
+            // try
+            // {
+            //     using (var pdfDocument = PdfDocument.Open(pdfPath))
+            //     {
+            //         // PdfPig bietet eine einfache Möglichkeit, Metadaten zu extrahieren
+            //         var documentInfo = pdfDocument.Information;
+            //         metadata["Title"] = documentInfo.Title ?? "[Fehlt]";
+            //         metadata["Author"] = documentInfo.Author ?? "[Fehlt]";
+            //         metadata["Subject"] = documentInfo.Subject ?? "[Fehlt]";
+            //         metadata["Keywords"] = documentInfo.Keywords ?? "[Fehlt]";
+            //     }
+            // }
+            // catch
+            // {
+            //     metadata["Error"] = "Fehler beim Lesen der Metadaten.";
+            // }
+            // return metadata;
+            throw new NotImplementedException();
         }
 
         public List<(string, string)> HasAltTexts(string pdfPath)
@@ -92,20 +93,20 @@ namespace PLG_Pdac
         }
 
 
-        public bool HasDocumentTags(string pdfPath)
+        public (bool, string?, string?) HasDocumentMetadata(string pdfPath)
         {
             try
             {
                 using (var pdfDocument = PdfDocument.Open(pdfPath))
                 {
-                    // PdfPig bietet keine spezifische API zur Extraktion von Tags, daher wird hier der Vorabcheck verwendet.
-                    // Es kann eine erweiterte Logik hinzugefügt werden, die nach Tags in der Struktur sucht.
-                    return false; // PdfPig hat keine eingebaute Tag-Extraktion wie iText
+                    DocumentInformation information = pdfDocument.Information;
+                    if(string.IsNullOrWhiteSpace(information.Author.ToString()) || string.IsNullOrWhiteSpace(information.Title.ToString())) return (false, information.Author, information.Title);
+                    return (true, information.Author, information.Title);
                 }
             }
             catch
             {
-                return false; // Fehler beim Lesen der Datei
+                return (false, null, null); // Fehler beim Lesen der Datei
             }
         }
 
