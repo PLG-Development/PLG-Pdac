@@ -24,27 +24,28 @@ public partial class WndResult : Window
 
     public void Check(string pdfPath)
     {
-        var pdfCheck = new PdfCheck();
-        bool textExtracted = pdfCheck.CanExtractText(pdfPath);
-        var metadata = pdfCheck.GetMetadata(pdfPath);
-        bool altTextFound = pdfCheck.HasAltTexts(pdfPath);
-        bool tagsPresent = pdfCheck.HasDocumentTags(pdfPath);
-        bool pdfUaCompliant = pdfCheck.IsPdfUaCompliant(pdfPath);
+
+        try{
+            var pdfCheck = new PdfCheck();
+            bool textExtracted = pdfCheck.CanExtractText(pdfPath);
+            var metadata = pdfCheck.GetMetadata(pdfPath);
+            List<(string, string)> altTextFound = pdfCheck.HasAltTexts(pdfPath);
+            bool tagsPresent = pdfCheck.HasDocumentTags(pdfPath);
+            bool pdfUaCompliant = pdfCheck.IsPdfUaCompliant(pdfPath);
 
 
-
-
-        LblResult.Content  = "Text exrahierbar: " + textExtracted;
-        LblResult.Content += "\nAlt-Text gefunden: " + altTextFound;
-        LblResult.Content += "\nTags vorhanden: " + tagsPresent;
-        LblResult.Content += "\nUA-Kompatibilität: " + pdfUaCompliant;
-        LblResult.Content += "\nMetadaten: ";
-        foreach (var entry in metadata)
-        {
-            LblResult.Content += $"\n{entry.Key}: {entry.Value}";
+            LblResult.Content  = "Text exrahierbar: " + textExtracted;
+            LblResult.Content += "\nAlt-Text gefunden: " + altTextFound;
+            LblResult.Content += "\nTags vorhanden: " + tagsPresent;
+            LblResult.Content += "\nUA-Kompatibilität: " + pdfUaCompliant;
+            LblResult.Content += "\nMetadaten: ";
+            foreach (var entry in metadata)
+            {
+                LblResult.Content += $"\n{entry.Key}: {entry.Value}";
+            }
+        } catch (NotImplementedException niex) {
+            
         }
-
-
     }
 
     public void WndResult_Closing(object sender, WindowClosingEventArgs e){
